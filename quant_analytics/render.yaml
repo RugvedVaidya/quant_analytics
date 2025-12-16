@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: quant-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+
+  - type: web
+    name: quant-dashboard
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run ui/dashboard.py --server.port 8501 --server.address 0.0.0.0
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: quant-backend
+          property: host
