@@ -3,8 +3,8 @@ services:
     name: quant-backend
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    buildCommand: pip install -r quant_analytics/Requirements.txt
+    startCommand: python quant_analytics/app.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
@@ -13,8 +13,8 @@ services:
     name: quant-dashboard
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run ui/dashboard.py --server.port 8501 --server.address 0.0.0.0
+    buildCommand: pip install -r quant_analytics/Requirements.txt
+    startCommand: streamlit run quant_analytics/ui/dashboard.py --server.port 8501 --server.address 0.0.0.0
     envVars:
       - key: BACKEND_URL
         fromService:
